@@ -113,7 +113,7 @@ int16_t step_pi_Vdc2IacAmp_volt_comp(int32_t vdc_ref, int32_t vdc, int16_t phase
 
 	int32_t vc_ac = COEF * i_ref_amp * sin1((int16_t)(2*phase));
 
-	int32_t vdc_comp = vdc + (vc_ac>>(EXTEND_FXP_V2+15+1)); //+1 for testing, ToDo: remove and check sign
+	int32_t vdc_comp = vdc + (vc_ac>>(EXTEND_FXP_V2+15));
 	//debug_vdc_comp = vdc_comp;
 
 	pi_step((vdc_comp-vdc_ref), &piCtrl);  // 100Hz ripple comp

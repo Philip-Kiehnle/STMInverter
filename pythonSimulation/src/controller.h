@@ -27,7 +27,7 @@ int32_t get_VIN_ADCR();
 #define VIN_CROWBAR_MIN_RAW ((1<<ADC_BITS)*VIN_CROWBAR_MIN/VIN_ADCR)
 #define VIN_CROWBAR_MAX 31.5
 #define VIN_CROWBAR_MAX_RAW ((1<<ADC_BITS)*VIN_CROWBAR_MAX/VIN_ADCR)
-#define VIN_MAX 32.5
+#define VIN_MAX 33.5
 #define VIN_MAX_RAW ((1<<ADC_BITS)*VIN_MAX/VIN_ADCR)
 
 #define VGRID_AMP 325
@@ -51,7 +51,9 @@ int32_t get_VGRID_ADCR();
 
 #define IGRID_ADCR 30  // [-15,+15A]; no grid current sensor is used at the moment
 int32_t get_IGRID_ADCR();
-#define IAC_AMP_MAX 8.5  //(6 * sqrt(2))  // ToDo 6,2Aamp sind in echt nur 4,2Aamp, bei 7 hat Automat ausgelöst -> Phase shift, dann okay, aber nur 50Wout -> 8A, okay -> 8.5A
+#define IAC_AMP_MAX 8.5  //(6 * sqrt(2))  // ToDo 6,2Aamp sind in echt nur 4,2Aamp, bei 7 hat Automat ausgelöst -> Phase shift, dann okay, aber nur 50Wout -> 8A, okay
+// -> 8.5A sind 55Watt_grid -> 55/0,9=61Wdc -> Ziel:5Aac_sec * 16,4V=82Wdc -> 74Wgrid -> Strom um 34% erhöhen
+// 18.02.2023: 2.2Arefamp = 8.2W/11.9VA sehr leiser Betrieb
 #define IAC_AMP_MAX_RAW ((1<<ADC_BITS) * IAC_AMP_MAX/IGRID_ADCR)
 #define I_REF_AMP_MIN 1.4  // todo fix when current scale fixed  1.2refamp -> 0.3W Einspeisung
 #define I_REF_AMP_MIN_RAW ((1<<ADC_BITS) * I_REF_AMP_MIN/IGRID_ADCR)

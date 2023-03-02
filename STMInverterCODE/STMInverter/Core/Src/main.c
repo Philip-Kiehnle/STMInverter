@@ -232,13 +232,13 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 //  		  duty1 = PWM_MAX_HALF + ( (int32_t)( (PWM_MAX_HALF*(VGRID_AMP/VGRID_TRATIO)/VDC_REF)*(int32_t)cos1(phase_gridforming) ) >> 15 );
 //		  GPIOA->BRR = SHUTDOWN_MASK;  // enable PWM
 
-		  // If crowbar has a lot of work to do in the first 15 seconds -> enough power is available
-	  	  if (cnt_crowbar_actions > 500) {
+		  // If crowbar has a lot of work to do in the first 30 seconds -> enough power is available
+	  	  if (cnt_crowbar_actions > 1060) {
 			  state = GRID_CONNECTING;
 			  cnt_rel = 0;
 		  }
 
-		  if (cnt_rel >= 15*CTRL_FREQ) {  // if still here after 15 sec -> reset microcontroller
+		  if (cnt_rel >= 30*CTRL_FREQ) {  // if still here after 30 sec -> reset microcontroller
 			  NVIC_SystemReset();  // most efficient way to get back to first state
 		  }
   		  break;
@@ -295,7 +295,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 			if (i_ref_amp < I_REF_AMP_MIN_RAW) {
 				cnt_power_low++;
-				if (cnt_power_low == 15*CTRL_FREQ ) {  // 15sec low power -> reset microcontroller
+				if (cnt_power_low == 30*CTRL_FREQ ) {  // 30 sec low power -> reset microcontroller
 					NVIC_SystemReset();
 				}
 			} else {
@@ -306,7 +306,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
   		  } else {
 			  GPIOA->BSRR = SHUTDOWN_MASK;  // disable PWM & yellow LED
-			  if (cnt_rel == 15*CTRL_FREQ) {  // 15 sec no valid grid -> reset microcontroller
+			  if (cnt_rel == 30*CTRL_FREQ) {  // 30 sec no valid grid -> reset microcontroller
 				  NVIC_SystemReset();
 			  }
   		  }
