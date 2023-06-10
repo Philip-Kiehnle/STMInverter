@@ -1,11 +1,11 @@
 # STMInverter - PV inverter based on STM32F030
 
 This project was inspired by some disused PV modules. Instead of recycling the modules, they were upcycled.
-Mounted on a wood storage shed, they can produce some energy and protect the wood from water at the same time👍  
+Mounted on a wood storage shed, they can produce some energy and protect the wood from rainwater at the same time👍  
 The picture shows the installation with two of four modules mounted.
 ![PV_installation](images/PV_installation.jpg "PV installation 50% complete")
 
-But in order to use the solar power in a comfortable way, an inverter is necessary. Lets build a small PV inverter!
+But in order to use the solar power in a comfortable way, an inverter is necessary. Let's build a small PV inverter!
 
 System overview:
 ```
@@ -65,7 +65,7 @@ The STM32CubeIDE and the integrated STM32CubeMX init code generation tools are u
 
 ## Results
 ![Osci](images/H-bridge_output_current.PNG "output current")
-All measurements are done at the low voltage side of the transformer:  
+All measurements are taken at the low-voltage side of the transformer:  
 Chn1(yellow) and Chn2(green) show the full-bridge PWM output voltages.  
 Chn3(orange) shows the DC-voltage (no curve visible).  
 Chn4(blue) shows the output current.  
@@ -80,6 +80,8 @@ The amplitude of the PLL quadrature signals, v and qv matches the amplitude of t
 The PLL detects 50Hz only. If pure sinusoidal current should be fed into the grid, more sophisticated PLL structures or current controllers are necessary. But this approach seems to be a grid-friendly approach, since harmonics are partially compensated by the inverter.
 
 For grid islandig detection, more sophisticated methods should be implemented. At the moment, the grid is valid if 50Hz +-1Hz and Vgrid_amplitude_nom +-10% are detected.  
+
+Design a combined PCB for the controller and the power stage and get rid of the breadboard demonstrator with an old 30V Mosfet power stage protoype.
 
 
 

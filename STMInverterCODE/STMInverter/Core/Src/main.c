@@ -233,7 +233,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 //		  GPIOA->BRR = SHUTDOWN_MASK;  // enable PWM
 
 		  // If crowbar has a lot of work to do in the first 30 seconds -> enough power is available
-	  	  if (cnt_crowbar_actions > 1060) {
+		  if (cnt_crowbar_actions > 1080) {
 			  state = GRID_CONNECTING;
 			  cnt_rel = 0;
 		  }
